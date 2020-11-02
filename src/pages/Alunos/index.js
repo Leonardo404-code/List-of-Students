@@ -82,51 +82,44 @@ export default function Alunos() {
   };
 
   return (
-      <Container>
+    <Container>
+    <Loading isLoading={isLoading} />
 
-        <Loading isLoading={isLoading} />
+    <h1>Alunos</h1>
 
-        <h1>Alunos</h1>
+    <NovoAluno to="/aluno/">Novo aluno</NovoAluno>
 
-        <NovoAluno to="/aluno/">Novo Aluno</NovoAluno>
+    <AlunoContainer>
+      {alunos.map((aluno, index) => (
+        <div key={String(aluno.id)}>
+          <ProfilePicture>
+            {get(aluno, 'Fotos[0].url', false) ? (
+              <img src={aluno.Fotos[0].url} alt="" />
+            ) : (
+              <FaUserCircle size={36} />
+            )}
+          </ProfilePicture>
 
-        <AlunoContainer>
-          {alunos.map((aluno, index) => (
+          <span>{aluno.nome}</span>
+          <span>{aluno.email}</span>
 
-            <div key={String(aluno.id)}>
+          <Link to={`/aluno/${aluno.id}/edit`}>
+            <FaEdit size={16} />
+          </Link>
 
-              <ProfilePicture>
+          <Link onClick={handleDeleteAsk} to={`/aluno/${aluno.id}/delete`}>
+            <FaWindowClose size={16} />
+          </Link>
 
-                <FaUserCircle size={36}/>
-
-              </ProfilePicture>
-
-              <span>{aluno.nome}</span>
-
-              <span>{aluno.email}</span>
-
-              <Link to={`/aluno/${aluno.id}/edit`}>
-
-                <FaEdit size={16} />
-
-              </Link>
-
-              <Link onClick={handleDeleteAsk}  to={`/aluno/${aluno.id}/delete`}>
-
-                <FaWindowClose size={16} />
-
-              </Link>
-
-              <FaExclamation
-              size={16}
-              display='none'
-              cursor='pointer'
-              onClick={e => handleDelete(e,aluno.id, index)}
-              />
-
-            </div>
-            ))}
-        </AlunoContainer>
-      </Container>
-  );
+          <FaExclamation
+            size={16}
+            display="none"
+            cursor="pointer"
+            onClick={e => handleDelete(e, aluno.id, index)}
+          />
+        </div>
+      ))}
+    </AlunoContainer>
+  </Container>
+);
 }

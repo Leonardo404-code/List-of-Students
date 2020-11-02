@@ -29,15 +29,15 @@ export default function Fotos({ match }) {
     const getData = async () => {
       try{
         setIsLoading(true);
-        const {data} = await axios.get(`/aluno/${id}`);
-        setFoto(data, 'Foto[0].url', '');
+        const {data} = await axios.get(`/alunos/${id}`);
+        setFoto(get(data, 'Fotos[0].url', ''));
         setIsLoading(false);
-      }catch(err){
+      } catch {
         toast.error('Erro ao obter imagem');
         setIsLoading(false);
         history.push('/');
       }
-    }
+    };
     getData();
   }, [id]);
 
