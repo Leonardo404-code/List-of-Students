@@ -16,6 +16,8 @@ import axios from '../../services/axios';
 
 import Loading from '../../components/loading';
 
+import history from '../../services/history';
+
 
 
 export default function Alunos() {
@@ -45,6 +47,8 @@ export default function Alunos() {
     exclamation.setAttribute('display', 'block');
 
     e.currentTarget.remove();
+
+    toast.warning('Aluno apagado com sucesso, Recarregue a página')
 
   };
 
