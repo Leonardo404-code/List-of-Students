@@ -19,7 +19,6 @@ import Loading from '../../components/loading';
 import history from '../../services/history';
 
 
-
 export default function Alunos() {
 
   const [alunos, setAlunos] = useState([]);
@@ -87,43 +86,43 @@ export default function Alunos() {
 
   return (
     <Container>
-    <Loading isLoading={isLoading} />
+      <Loading isLoading={isLoading} />
 
-    <h1>Alunos</h1>
+      <h1>Alunos</h1>
 
-    <NovoAluno to="/aluno/">Novo aluno</NovoAluno>
+      <NovoAluno to="/aluno/">Novo aluno</NovoAluno>
 
-    <AlunoContainer>
-      {alunos.map((aluno, index) => (
-        <div key={String(aluno.id)}>
-          <ProfilePicture>
-            {get(aluno, 'Fotos[0].url', false) ? (
-              <img src={aluno.Fotos[0].url} alt="" />
-            ) : (
-              <FaUserCircle size={36} />
-            )}
-          </ProfilePicture>
+      <AlunoContainer>
+        {alunos.map((aluno, index) => (
+          <div key={String(aluno.id)}>
+            <ProfilePicture>
+              {get(aluno, 'Fotos[0].url', false) ? (
+                <img src={aluno.Fotos[0].url} alt="" />
+              ) : (
+                <FaUserCircle size={36} />
+              )}
+            </ProfilePicture>
 
-          <span>{aluno.nome}</span>
-          <span>{aluno.email}</span>
+            <span>{aluno.nome}</span>
+            <span>{aluno.email}</span>
 
-          <Link to={`/aluno/${aluno.id}/edit`}>
-            <FaEdit size={16} />
-          </Link>
+            <Link to={`/aluno/${aluno.id}/edit`}>
+              <FaEdit size={16} />
+            </Link>
 
-          <Link onClick={handleDeleteAsk} to={`/aluno/${aluno.id}/delete`}>
-            <FaWindowClose size={16} />
-          </Link>
+            <Link onClick={handleDeleteAsk} to={`/aluno/${aluno.id}/delete`}>
+              <FaWindowClose size={16} />
+            </Link>
 
-          <FaExclamation
-            size={16}
-            display="none"
-            cursor="pointer"
-            onClick={e => handleDelete(e, aluno.id, index)}
-          />
-        </div>
-      ))}
-    </AlunoContainer>
+            <FaExclamation
+              size={16}
+              display="none"
+              cursor="pointer"
+              onClick={e => handleDelete(e, aluno.id, index)}
+            />
+          </div>
+        ))}
+      </AlunoContainer>
   </Container>
 );
 }

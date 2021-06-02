@@ -12,8 +12,10 @@ export default createGlobalStyle`
 
   body{
     font-family: sans-serif;
-    background: ${colors.primaryDarkColor};
-    color: ${colors.primaryDarkColor};
+    background: url("https://thumbs.gfycat.com/ElectricAggravatingFiddlercrab-size_restricted.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
   }
 
   html, body, #root {
@@ -46,9 +48,9 @@ export default createGlobalStyle`
 
 export const Container = styled.section`
   max-width: 480px;
-  background: #fff;
+  background: linear-gradient(108.99deg, rgba(255, 255, 255, 0.5) 0.71%, rgba(255, 255, 255, 0.25) 100%);
+  backdrop-filter: blur(10px);
   margin: 30px auto;
   padding: 30px;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
 `;

@@ -56,7 +56,7 @@ export default function Fotos({ match }) {
 
     try{
       setIsLoading(true);
-      await axios.post('/fotos/', formData, {
+      await axios.post('/fotos', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -84,14 +84,11 @@ export default function Fotos({ match }) {
         <Title>Fotos</Title>
 
         <Form>
-        <label htmlFor="foto">
-          {foto ? <img src={foto} alt="Foto" /> : 'Selecionar'}
-          <input type="file" id="foto" onChange={handleChange}/>
-        </label>
-
+          <label htmlFor="foto">
+            {foto ? <img src={foto} alt="Foto" /> : 'Selecionar'}
+            <input type="file" id="foto" onChange={handleChange}/>
+          </label>
         </Form>
-
-
       </Container>
   );
 }
