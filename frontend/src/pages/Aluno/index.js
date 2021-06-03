@@ -1,20 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PropTypes, { number } from 'prop-types';
 
-import { Container } from '../../styles/globalStyles';
+import { ButtonBlue, Container } from '../../styles/globalStyles';
 
 import { get } from 'lodash';
 
-import { Form, ProfilePicture, Title }  from './styled';
+import { Form, ProfilePicture, Title } from './styled';
 
 import { toast } from 'react-toastify';
 
 import { isEmail, isInt, isFloat } from 'validator';
 
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import {FaEdit, FaUserCircle} from 'react-icons/fa';
+import { FaEdit, FaUserCircle } from 'react-icons/fa';
 
 import { Link } from 'react-router-dom';
 
@@ -201,7 +201,7 @@ export default function Aluno({ match }) {
           placeholder="Altura"
         />
 
-        <button type="submit">Enviar</button>
+        <ButtonBlue type="submit">Enviar</ButtonBlue>
       </Form>
     </Container>
   );

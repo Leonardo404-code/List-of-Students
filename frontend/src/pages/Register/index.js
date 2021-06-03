@@ -1,30 +1,29 @@
-import React, {useState} from 'react';
-//Importando notificações do react
-import {toast} from 'react-toastify';
-// importando para validar o email
-import {isEmail} from 'validator';
-// função para redux
-import {useSelector, useDispatch} from 'react-redux';
-// container global
-import { Container } from '../../styles/globalStyles';
-//estilos do formulário
-import {Form} from './styled';
-//componente loading
+import React, { useState } from 'react';
+
+import { toast } from 'react-toastify';
+
+import { isEmail } from 'validator';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import { Container, ButtonBlue } from '../../styles/globalStyles';
+
+import { Form } from './styled';
+
 import Loading from '../../components/loading';
 
 import * as actions from '../../store/modules/auth/actions';
 
-
 export default function Register() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const id = useSelector(state => state.auth.user.id);
+  const id = useSelector((state) => state.auth.user.id);
 
-  const nomeStored = useSelector(state => state.auth.user.nome);
+  const nomeStored = useSelector((state) => state.auth.user.nome);
 
-  const emailStored = useSelector(state => state.auth.user.email);
+  const emailStored = useSelector((state) => state.auth.user.email);
 
-  const isLoading = useSelector(state => state.auth.user.isLoading);
+  const isLoading = useSelector((state) => state.auth.user.isLoading);
 
   const [nome, setNome] = useState('');
 
@@ -33,69 +32,70 @@ export default function Register() {
   const [password, setPassword] = useState('');
 
   React.useEffect(() => {
-    if(!id) return;
+    if (!id) return;
     setNome(nomeStored);
     setEmail(emailStored);
   }, [emailStored, id, nomeStored]);
 
-  async function handleSubmit(e){
+  async function handleSubmit(e) {
     e.preventDefault();
 
     let formErrors = false;
 
-    if(nome.length < 3 || nome.length > 255) {
+    if (nome.length < 3 || nome.length > 255) {
       formErrors = true;
       toast.error('Nome deve ter entre 3 e 255 caracteres');
     }
-    if(!isEmail(email)) {
+    if (!isEmail(email)) {
       formErrors = true;
       toast.error('E-mail inválido');
     }
-    if(!id && (password.length < 6 || password.length > 50)) {
+    if (!id && (password.length < 6 || password.length > 50)) {
       formErrors = true;
       toast.error('Senha deve ter entre 6 e 50 caracteres');
     }
 
-    if(formErrors) return;
+    if (formErrors) return;
 
-    dispatch(actions.registerRequest({nome, email, password, id}));
-
+    dispatch(actions.registerRequest({ nome, email, password, id }));
   }
   return (
-      <Container>
-        <Loading isLoading={isLoading} />
-        <h1>{id ? 'Editar dados' : 'Crie sua conta'}</h1>
+    <Container>
+      <Loading isLoading={isLoading} />
+      <h1 align="middle">{id ? 'Editar dados' : 'Crie sua conta'}</h1>
 
-        <Form onSubmit={handleSubmit}>
-          <label htmlFor="nome">
-            Nome:
-            <input
+      <Form onSubmit={handleSubmit}>
+        <label htmlFor="nome">
+          Nome:
+          <input
             type="text"
             value={nome}
-            onChange={e => setNome(e.target.value)}
+            onChange={(e) => setNome(e.target.value)}
             placeholder="Seu nome"
-            />
-          </label>
-          <label htmlFor="email">
-            E-mail:
-            <input
+          />
+        </label>
+        <label htmlFor="email">
+          E-mail:
+          <input
             type="email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Seu e-mail"
-            />
-          </label>
-          <label htmlFor="senha">
-            Senha:
-            <input
+          />
+        </label>
+        <label htmlFor="senha">
+          Senha:
+          <input
             type="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Sua senha"
-            />
-          </label>
-          <button type="submit">{id ? 'Salvar' : 'Criar minha conta'}</button>
-        </Form>
-      </Container>
+          />
+        </label>
+        <ButtonBlue type="submit">
+          {id ? 'Salvar' : 'Criar minha conta'}
+        </ButtonBlue>
+      </Form>
+    </Container>
   );
 }

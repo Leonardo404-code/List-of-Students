@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-import { Container } from '../../styles/globalStyles';
+import { Container, ButtonBlue, ButtonRed } from '../../styles/globalStyles';
 
-import {AlunoContainer, ProfilePicture, NovoAluno } from './styled';
+import { AlunoContainer, ProfilePicture, NovoAluno } from './styled';
 
-import {FaUserCircle, FaEdit, FaWindowClose, FaExclamation} from 'react-icons/fa';
+import { FaUserCircle, FaExclamation } from 'react-icons/fa';
 
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
-import {get} from 'lodash';
+import { get } from 'lodash';
 
 import axios from '../../services/axios';
 
@@ -18,15 +18,13 @@ import Loading from '../../components/loading';
 
 import history from '../../services/history';
 
-
 export default function Alunos() {
-
   const [alunos, setAlunos] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    async function getData(){
+    async function getData() {
       setIsLoading(true);
       const response = await axios.get('/alunos/');
       setAlunos(response.data);
@@ -34,11 +32,9 @@ export default function Alunos() {
     }
 
     getData();
-
   }, []);
 
-  const handleDeleteAsk= e =>{
-
+  const handleDeleteAsk = (e) => {
     e.preventDefault();
 
     const exclamation = e.currentTarget.nextSibling;
@@ -47,19 +43,16 @@ export default function Alunos() {
 
     e.currentTarget.remove();
 
-    toast.warning('Aluno apagado com sucesso, Recarregue a página')
-
+    toast.warning('Aluno apagado com sucesso, Recarregue a página');
   };
 
   const handleDelete = async (e, id, index) => {
-
     e.persist();
 
-    try{
-
+    try {
       setIsLoading(true);
 
-      await axios.delete(`/alunos/${id}`)
+      await axios.delete(`/alunos/${id}`);
 
       const novosAlunos = [...alunos];
 
@@ -68,19 +61,16 @@ export default function Alunos() {
       setAlunos(novosAlunos);
 
       setIsLoading(false);
-
-    }catch(e){
-
+    } catch (e) {
       const status = get(e, 'response.status', 0);
 
-      if(status === 401) {
+      if (status === 401) {
         toast.error('Você precisa fazer login');
       } else {
         toast.error('Ocorreu um erro ao excluir aluno');
       }
 
       setIsLoading(false);
-
     }
   };
 
@@ -88,9 +78,11 @@ export default function Alunos() {
     <Container>
       <Loading isLoading={isLoading} />
 
-      <h1>Alunos</h1>
+      <h1 align="right">Alunos</h1>
 
-      <NovoAluno to="/aluno/">Novo aluno</NovoAluno>
+      <NovoAluno to="/aluno/" align="right">
+        Novo aluno
+      </NovoAluno>
 
       <AlunoContainer>
         {alunos.map((aluno, index) => (
@@ -107,22 +99,22 @@ export default function Alunos() {
             <span>{aluno.email}</span>
 
             <Link to={`/aluno/${aluno.id}/edit`}>
-              <FaEdit size={16} />
+              <ButtonBlue>Editar</ButtonBlue>
             </Link>
 
             <Link onClick={handleDeleteAsk} to={`/aluno/${aluno.id}/delete`}>
-              <FaWindowClose size={16} />
+              <ButtonRed>Delete</ButtonRed>
             </Link>
 
             <FaExclamation
               size={16}
               display="none"
               cursor="pointer"
-              onClick={e => handleDelete(e, aluno.id, index)}
+              onClick={(e) => handleDelete(e, aluno.id, index)}
             />
           </div>
         ))}
       </AlunoContainer>
-  </Container>
-);
+    </Container>
+  );
 }

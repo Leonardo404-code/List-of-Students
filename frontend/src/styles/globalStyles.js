@@ -12,9 +12,10 @@ export default createGlobalStyle`
 
   body{
     font-family: sans-serif;
-    background: url("https://thumbs.gfycat.com/ElectricAggravatingFiddlercrab-size_restricted.gif");
+    /* background: url("https://thumbs.gfycat.com/ElectricAggravatingFiddlercrab-size_restricted.gif");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
+    background: #000;
     color: #fff;
   }
 
@@ -24,21 +25,15 @@ export default createGlobalStyle`
 
   button{
     cursor: pointer;
-    background: ${colors.primaryColor};
     border: none;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-weight: 700;
+    color: #fff;  
     transition: all 380ms;
   }
-  button:hover{
-    filter:brightness(85%);
-  }
+
 
   a{
     text-decoration: none;
-    color: ${colors.primaryColor}
+    color: #fff;
   }
 
   ul{
@@ -47,10 +42,38 @@ export default createGlobalStyle`
 `;
 
 export const Container = styled.section`
-  max-width: 480px;
-  background: linear-gradient(108.99deg, rgba(255, 255, 255, 0.5) 0.71%, rgba(255, 255, 255, 0.25) 100%);
+  max-width: 90%;
+  background: linear-gradient(
+    108.99deg,
+    rgba(255, 255, 255, 0.5) 0.71%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
   backdrop-filter: blur(10px);
   margin: 30px auto;
   padding: 30px;
   border-radius: 30px;
+`;
+
+export const ButtonBlue = styled.button`
+  background: transparent;
+  padding: 1rem 2rem;
+  border: 0.5px solid;
+
+  border-radius: 30px;
+
+  :hover {
+    background: #00b4d8;
+  }
+`;
+
+export const ButtonRed = styled.button`
+  background: transparent;
+  padding: 1rem 2rem;
+  border: 0.5px solid;
+
+  border-radius: 30px;
+
+  :hover {
+    background: #d00000;
+  }
 `;

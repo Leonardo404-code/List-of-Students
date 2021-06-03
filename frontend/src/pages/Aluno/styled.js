@@ -10,7 +10,7 @@ export const Form = styled.form`
     height: 40px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 30px;
     padding: 0 10px;
   }
 `;
@@ -23,7 +23,6 @@ export const ProfilePicture = styled.div`
   position: relative;
   margin-top: 20px;
 
-
   img {
     width: 180px;
     height: 180px;
@@ -31,14 +30,14 @@ export const ProfilePicture = styled.div`
   }
 
   a {
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     border: none;
     position: absolute;
     bottom: 0;
     color: #fff;
-    background: ${colors.primaryColor};
+    background: #00b4d8;
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -47,4 +46,4 @@ export const ProfilePicture = styled.div`
 
 export const Title = styled.h1`
   text-align: center;
-`
+`;

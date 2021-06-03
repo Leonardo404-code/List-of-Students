@@ -4,65 +4,65 @@ import * as actions from '../../store/modules/auth/actions';
 
 import Loading from '../../components/loading';
 
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
-import {isEmail} from 'validator';
+import { isEmail } from 'validator';
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {get} from 'lodash';
+import { get } from 'lodash';
 
-import { Container } from '../../styles/globalStyles';
+import { ButtonRed, Container } from '../../styles/globalStyles';
 
-import {Form} from './styled';
-
+import { Form } from './styled';
 
 export default function Login(props) {
-
   const dispath = useDispatch();
 
   const prevPath = get(props, 'location.state.prevPath', '/');
 
-  const isLoading = useSelector(state => state.auth.isLoading);
+  const isLoading = useSelector((state) => state.auth.isLoading);
 
   const [email, setEmail] = React.useState('');
 
   const [password, setPassword] = React.useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     let formErrors = false;
 
-    if(!isEmail(email)) {
+    if (!isEmail(email)) {
       formErrors = true;
       toast.error('E-mail inválido');
     }
-    if(password.length < 6 || password.length > 50) {
+    if (password.length < 6 || password.length > 50) {
       formErrors = true;
       toast.error('Senha inválida');
     }
 
-    if(formErrors) return;
-    dispath(actions.loginRequest({email, password, prevPath}));
-  }
+    if (formErrors) return;
+    dispath(actions.loginRequest({ email, password, prevPath }));
+  };
   return (
-      <Container>
-        <Loading isLoading={isLoading} />
-        <h1>Login</h1>
-        <Form onSubmit={handleSubmit}>
-          <input type="text"
+    <Container>
+      <Loading isLoading={isLoading} />
+      <h1 align="middle">Login</h1>
+      <Form onSubmit={handleSubmit}>
+        <input
+          type="text"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="Seu e-mail"
-          />
-          <input type="password"
+        />
+        <input
+          type="password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="Sua senha"
-          />
-          <button type="submit">Acessar</button>
-        </Form>
-      </Container>
+        />
+        <ButtonRed type="submit">Acessar</ButtonRed>
+      </Form>
+    </Container>
   );
 }
