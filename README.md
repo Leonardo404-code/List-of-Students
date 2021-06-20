@@ -21,6 +21,14 @@ A full-stack web application built entirely with JavaScript, using ReactJs on th
 - Install all dependencies: ```npm install``` or ```yarn add```
 - In the config folder in the database.js file, change the following fields to locate your database:
 
+```
+  host: process.env.DATABASE_HOST, // Host of your database (if on your machine it will be: localhost)
+  port: process.env.DATABASE_PORT, // Port your database is running
+  username: process.env.DATABASE_USERNAME, // Database user
+  password: process.env.DATABASE_PASSWORD, // Database password
+  database: process.env.DATABASE, // Database name
+```
+
 - Realize the database migrations with sequelize, in terminal type:
 ```npx sequelize db:migrate```
 
