@@ -12,10 +12,9 @@ export default createGlobalStyle`
 
   body{
     font-family: sans-serif;
-    /* background: url("https://thumbs.gfycat.com/ElectricAggravatingFiddlercrab-size_restricted.gif");
+    background: url("https://thumbs.gfycat.com/ElectricAggravatingFiddlercrab-size_restricted.gif");
     background-repeat: no-repeat;
-    background-size: cover; */
-    background: #000;
+    background-size: cover;
     color: #fff;
   }
 
